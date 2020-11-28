@@ -1,0 +1,41 @@
+service: product-service
+app: rs-school-app
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  region: eu-west-1
+  profile: yevhenAdmin
+  stage: dev
+  stackTags:
+    project: "rs-school-app"
+
+plugins:
+  - serverless-webpack
+  - serverless-plugin-resource-tagging
+
+custom:
+  webpack:
+    webpackConfig: 'webpack.config.js'
+    includeModules: true
+
+functions:
+  getAllProducts:
+    handler: handler.getAllProducts
+    events:
+      - http:
+          path: products
+          method: get
+          cors: true
+  
+  getProductById:
+    handler: handler.getProductById
+    events:
+      - http:
+          path: products/{productId}
+          method: get
+          cors: true
+          request: 
+            parameters: 
+              paths: 
+                productId: true
