@@ -4,27 +4,33 @@
   "description": "Product service (API based)",
   "main": "handler.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "commit:check": "npm run test && npm run lint"
+    "check-types": "tsc --project jsconfig.json",
+    "commit:check": "npm run test && npm run lint && npm run check-types"
   },
   "author": "",
   "license": "ISC",
-  "dependencies": {
+  "dependencies": {},
+  "devDependencies": {
+    "@babel/core": "^7.12.9",
+    "@babel/preset-env": "^7.12.7",
     "babel": "^6.23.0",
     "babel-core": "^6.26.3",
-    "babel-preset-es2015": "^6.24.1"
-  },
-  "devDependencies": {
+    "babel-jest": "^26.6.3",
+    "babel-preset-es2015": "^6.24.1",
     "eslint": "^7.14.0",
     "eslint-config-standard": "^16.0.2",
     "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsdoc": "^30.7.9",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.2.1",
     "husky": "^4.3.0",
+    "jest": "^26.6.3",
     "serverless-plugin-resource-tagging": "^1.0.11",
     "serverless-webpack": "^5.3.5",
+    "typescript": "^4.1.3",
     "webpack": "^4.44.1",
     "webpack-node-externals": "^2.5.0"
   },
@@ -32,5 +38,8 @@
     "hooks": {
       "pre-commit": "npm run lint"
     }
+  },
+  "jest": {
+    "verbose": true
   }
 }
