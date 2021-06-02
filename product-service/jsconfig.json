@@ -1,9 +1,15 @@
 {
-    "compilerOptions": {
-        "checkJs": true,
-        "resolveJsonModule": true,
-        "sourceMap": false
-    },
-    "include": ["src/**/*"],
-    "exclude": ["node_modules",".serverless","**/*.test.js"]
+  "compilerOptions": {
+    "checkJs": true,
+    "resolveJsonModule": true,
+    "sourceMap": false
+  },
+  "include": [
+    "/src/**/*"
+  ],
+  "typeAcquisition": {
+    "include": [
+      "jest"
+    ]
+  }
 }

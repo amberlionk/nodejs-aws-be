@@ -1,26 +1,47 @@
 {
-    "env": {
-        "node": true,
-        "jest": true,
-        "es2021": true
-    },
-    "extends": [
-        "standard",
-        "plugin:jsdoc/recommended"
-    ],
-    "parserOptions": {
-        "ecmaVersion": 12,
-        "sourceType": "module"
-    },
-    "plugins": [
-        "jsdoc"
-    ],
-    "rules": {
-        "quotes": ["error", "double"],
-        "linebreak-style": ["error", "unix"],
-        "jsdoc/require-description": 0,
-        "jsdoc/require-param-description": 0,
-        "jsdoc/require-property-description": 0,
-        "jsdoc/require-returns-description": 0
+  "env": {
+    "node": true,
+    "jest": true,
+    "es2021": true
+  },
+  "overrides": [
+    {
+      "files": [
+        "*.json"
+      ],
+      "plugins": [
+        "json-format"
+      ],
+      "settings": {
+        "json/ignore-files": [
+          "**/package-lock.json"
+        ],
+        "json/json-with-comments-files": [
+          "*.json"
+        ]
+      }
     }
+  ],
+  "extends": [
+    "standard"
+  ],
+  "plugins": [],
+  "parserOptions": {
+    "ecmaVersion": 12,
+    "sourceType": "module"
+  },
+  "rules": {
+    "quotes": [
+      "error",
+      "double"
+    ],
+    "comma-dangle": [
+      "error",
+      "never"
+    ],
+    "linebreak-style": [
+      "error",
+      "unix"
+    ]
+  }
 }

@@ -1,4 +1,5 @@
 import productList from "./productList.json"
+import ProductService from "./../services/product-service"
 
 /**
  * get all products handler
@@ -12,12 +13,14 @@ import productList from "./productList.json"
  * @returns {response}
  */
 export function getAllProducts (event, context) {
+  const productService = new ProductService(productList)
+
   const response = {
     headers: {
       "Access-Control-Allow-Origin": "*"
     },
     statusCode: 200,
-    body: JSON.stringify(productList)
+    body: JSON.stringify(productService.getProducts())
   }
 
   return response
