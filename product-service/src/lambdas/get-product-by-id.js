@@ -1,5 +1,4 @@
-import productList from "./productList.json"
-// <reference path="path/to/shared-file.js" />
+const productList = require("./productList.json")
 
 /**
  * get all products handlers
@@ -13,7 +12,7 @@ import productList from "./productList.json"
  * @property {object} body
  * @returns {Response}
  */
-export function getProductById (event, context) {
+function getProductById (event, context) {
   const { productId } = event
 
   productList.find(product => product.id === productId)
@@ -26,3 +25,5 @@ export function getProductById (event, context) {
     body: JSON.stringify(productList[0])
   }
 }
+
+module.exports = { getProductById }

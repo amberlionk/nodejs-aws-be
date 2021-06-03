@@ -1,5 +1,5 @@
-import productList from "./productList.json"
-import ProductService from "./../services/product-service"
+const ProductService = require("./../services/product-service")
+const productList = require("./productList.json")
 
 /**
  * get all products handler
@@ -12,7 +12,7 @@ import ProductService from "./../services/product-service"
  * @property {object} body
  * @returns {response}
  */
-export function getAllProducts (event, context) {
+function getAllProducts (event, context) {
   const productService = new ProductService(productList)
 
   const response = {
@@ -24,4 +24,8 @@ export function getAllProducts (event, context) {
   }
 
   return response
+}
+
+module.exports = {
+  getAllProducts
 }

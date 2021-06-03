@@ -1,6 +1,6 @@
 // import { getAllProducts } from "./get-all-products"
-/*
-describe("getAllProducts", () => {
+
+describe.skip("getAllProducts", () => {
   it("should return all products", () => {
 
     // expect().asdasdasdsd
@@ -8,4 +8,3 @@ describe("getAllProducts", () => {
     // console.log(products)
   })
 })
-*/

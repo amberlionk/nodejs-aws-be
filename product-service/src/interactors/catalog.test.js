@@ -1,4 +1,4 @@
-import { Catalog } from "./catalog"
+const { Catalog } = require("./catalog")
 
 describe("Catalog", () => {
   it("should be class instance Catalog", () => {

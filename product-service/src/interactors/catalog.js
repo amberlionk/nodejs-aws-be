@@ -8,4 +8,4 @@ class Catalog {
   }
 }
 
-export { Catalog }
+module.exports = { Catalog }

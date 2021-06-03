@@ -1,4 +1,4 @@
-import Product from "./product"
+const Product = require("./product")
 
 describe("Product", () => {
   it("should be class instance of Product", () => {
@@ -15,9 +15,8 @@ describe("Product", () => {
     })
 
     it("should fill defaults", () => {
-      // const product = new Product({ id: 1 })
-
-      // expect(product)
+    //  const product = new Product({ id: 1 })
+      // expect(1).toEqual(1)
     })
   })
 })
