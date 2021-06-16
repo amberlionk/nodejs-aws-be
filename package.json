@@ -14,7 +14,7 @@
   "author": "",
   "scripts": {
     "test": "jest",
-    "tdd": "jest --watch --detectOpenHandles",
+    "tdd": "jest --watch",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "commit:check": "npm run test --runInBand && npm run lint",

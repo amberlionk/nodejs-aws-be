@@ -1,29 +1,28 @@
-const ProductService = require("./../services/product-service")
-const productList = require("./productList.json")
+const { ProductsInteractor } = require("../interactors/products")
+const { storageGatewayFactory } = require("../drivers/storage-gateway")
 
-/**
- * get all products handler
- *
- * @param  {object} event
- * @param  {object} context
- * @typedef {object} response
- * @property {object} headers
- * @property {number} statusCode
- * @property {object} body
- * @returns {response}
- */
 function getAllProducts (event, context) {
-  const productService = new ProductService(productList)
+  const storageGateway = storageGatewayFactory()
+  const productsInteractor = new ProductsInteractor(storageGateway)
+  const respProducts = productsPresenter(productsInteractor.getAll())
 
   const response = {
     headers: {
       "Access-Control-Allow-Origin": "*"
     },
     statusCode: 200,
-    body: JSON.stringify(productService.getProducts())
+    body: JSON.stringify(respProducts)
   }
 
   return response
+}
+
+function productsPresenter (products = []) {
+  const productsList = products.map(product => {
+    return { ...product }
+  })
+
+  return productsList
 }
 
 module.exports = {
