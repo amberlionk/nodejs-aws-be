@@ -1,11 +1,9 @@
 const { getAllProducts } = require("./get-all-products")
-const { ProductsInteractor } = require("../interactors/products")
-const { storageGatewayFactory } = require("../drivers/storage-gateway")
+const { ProductsInteractor } = require("../interactors/products-interactor")
+const { Product } = require("../entities/product")
 
-jest.mock("../interactors/products")
+jest.mock("../interactors/products-interactor")
 jest.mock("../drivers/storage-gateway")
-
-const { Product } = jest.requireActual("../interactors/products")
 
 beforeEach(() => {
   jest.clearAllMocks()
@@ -39,11 +37,5 @@ describe("getAllProducts", () => {
     const result = getAllProducts()
 
     expect(result).toEqual(expectedResult)
-    expect(storageGatewayFactory).toHaveBeenCalledTimes(1)
-    expect(ProductsInteractor).toHaveBeenCalledTimes(1)
-    expect(getAllMock).toHaveBeenCalledTimes(1)
-    // не работает (((
-    // console.log(">", ProductsInteractor.mock.instances[0].getAll.mock.calls)
-    // expect(ProductsInteractor.mock.instances[0].getAll).toHaveBeenCalledTimes(1)
   })
 })

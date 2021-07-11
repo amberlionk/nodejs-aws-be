@@ -1,9 +1,9 @@
-const { ProductsInteractor } = require("../interactors/products")
+const { ProductsInteractor } = require("../interactors/products-interactor")
 const { storageGatewayFactory } = require("../drivers/storage-gateway")
 
 function getAllProducts (event, context) {
-  const storageGateway = storageGatewayFactory()
-  const productsInteractor = new ProductsInteractor(storageGateway)
+  const storageGatewayInstance = storageGatewayFactory()
+  const productsInteractor = new ProductsInteractor(storageGatewayInstance)
   const respProducts = productsPresenter(productsInteractor.getAll())
 
   const response = {

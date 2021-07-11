@@ -1,4 +1,5 @@
 const productsFileStorage = require("./productList.json")
+const { Product } = require("./../entities/product")
 
 class StorageGateway {
   getProducts () { throw new Error("Implement me") }
@@ -6,14 +7,16 @@ class StorageGateway {
 
 class FileStorageGateway extends StorageGateway {
   getProducts () {
-    return productsFileStorage
+    const products = productsFileStorage.map(product => new Product(product))
+
+    return products
   }
 }
 
-const fileStorage = new FileStorageGateway()
+const fileStorageInstance = new FileStorageGateway()
 
 function storageGatewayFactory () {
-  return fileStorage
+  return fileStorageInstance
 }
 
 module.exports = { storageGatewayFactory, StorageGateway, FileStorageGateway }

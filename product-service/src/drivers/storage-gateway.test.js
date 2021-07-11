@@ -1,5 +1,6 @@
 
 const { storageGatewayFactory, StorageGateway, FileStorageGateway } = require("./storage-gateway")
+const { Product } = require("./../entities/product")
 
 const products = [
   {
@@ -50,7 +51,14 @@ describe("FileStorageGateway", () => {
     const storageGateway = new FileStorageGateway()
 
     expect(storageGateway.getProducts).toBeDefined()
-    expect(storageGateway.getProducts()).toEqual(products)
+
+    const products = storageGateway.getProducts()
+
+    expect(products).toBeInstanceOf(Array)
+    expect(products).toHaveLength(2)
+    products.forEach(product => {
+      expect(product).toBeInstanceOf(Product)
+    })
   })
 })
 

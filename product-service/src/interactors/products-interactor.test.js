@@ -1,22 +1,23 @@
-const { ProductsInteractor, Product } = require("./products")
+const { ProductsInteractor } = require("./products-interactor")
+const { Product } = require("../entities/product")
 
 const expectedProducts = [
-  {
+  new Product({
     id: 1,
     count: 10,
     description: "descr",
     img: "http://example.com/img.png",
     price: "100",
     title: "title"
-  },
-  {
+  }),
+  new Product({
     count: 6,
     description: "",
     id: "7567ec4b-b10c-48c5-9345-fc73c48a80a0",
     price: 10,
     title: "Paddle 2",
     img: "https://images.unsplash.com/photo-1599582013263-80b822645216"
-  }
+  })
 ]
 
 const storageGatewayMok = {
@@ -46,9 +47,11 @@ describe("ProductsInteractor", () => {
       const productsInteractor = new ProductsInteractor(storageGatewayMok)
       const products = productsInteractor.getAll()
 
+      expect(products).toBeInstanceOf(Array)
       expect(products).toHaveLength(2)
-      expect(products).toContainEqual(expect.any(Product))
-      expect(storageGatewayMok.getProducts).toHaveBeenCalledTimes(1)
+      products.forEach(product => {
+        expect(product).toBeInstanceOf(Product)
+      })
     })
 
     // it("should return products", () => {
