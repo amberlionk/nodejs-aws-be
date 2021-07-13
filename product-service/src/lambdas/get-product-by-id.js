@@ -1,4 +1,4 @@
-const productList = require("./productList.json")
+const productList = require("./../drivers/productList.json")
 
 /**
  * get all products handlers
@@ -12,7 +12,7 @@ const productList = require("./productList.json")
  * @property {object} body
  * @returns {Response}
  */
-function getProductById (event, context) {
+async function getProductById (event, context) {
   const { productId } = event
 
   productList.find(product => product.id === productId)

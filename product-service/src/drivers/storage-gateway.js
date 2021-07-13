@@ -13,9 +13,11 @@ class FileStorageGateway extends StorageGateway {
   }
 }
 
-const fileStorageInstance = new FileStorageGateway()
+let fileStorageInstance = null
 
 function storageGatewayFactory () {
+  if (!fileStorageInstance) fileStorageInstance = new FileStorageGateway()
+
   return fileStorageInstance
 }
 

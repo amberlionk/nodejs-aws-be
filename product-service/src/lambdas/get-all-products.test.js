@@ -36,6 +36,6 @@ describe("getAllProducts", () => {
 
     const result = getAllProducts()
 
-    expect(result).toEqual(expectedResult)
+    expect(result).resolves.toEqual(expectedResult)
   })
 })

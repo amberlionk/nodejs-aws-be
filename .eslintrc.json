@@ -23,9 +23,12 @@
     }
   ],
   "extends": [
-    "standard"
+    "standard",
+    "plugin:require-path-exists/recommended"
   ],
-  "plugins": [],
+  "plugins": [
+    "require-path-exists"
+  ],
   "parserOptions": {
     "ecmaVersion": 12,
     "sourceType": "module"
