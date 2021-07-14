@@ -1,5 +1,6 @@
 const { ProductsInteractor } = require("./products-interactor")
 const { Product } = require("../entities/product")
+const { ProductNotFoundError } = require("../errors")
 
 const expectedProducts = [
   new Product({
@@ -21,7 +22,8 @@ const expectedProducts = [
 ]
 
 const storageGatewayMok = {
-  getProducts: jest.fn().mockReturnValue(expectedProducts)
+  getProducts: jest.fn().mockReturnValue(expectedProducts),
+  getProduct: jest.fn()
 }
 
 beforeEach(() => {
@@ -53,28 +55,35 @@ describe("ProductsInteractor", () => {
         expect(product).toBeInstanceOf(Product)
       })
     })
+  })
 
-    // it("should return products", () => {
-    //   const ProductsInteractorMock = jest.fn().mockImplementation(() => {
-    //     return {
-    //       getAll: jest.fn(() => [new Product({
-    //         id: 1,
-    //         count: 10,
-    //         description: "descr",
-    //         img: "http://example.com/img.png",
-    //         price: 100,
-    //         title: "title"
-    //       })])
-    //     }
-    //   })
-    //   const productsInteractor = new ProductsInteractorMock(storageGatewayMok)
-    //   const products = productsInteractor.getAll()
+  describe("getProduct", () => {
+    it("should return Product", () => {
+      storageGatewayMok.getProduct.mockReturnValueOnce(expectedProducts[0])
+      const productsInteractor = new ProductsInteractor(storageGatewayMok)
+      const product = productsInteractor.getProduct(expectedProducts[0].id)
 
-    //   expect(products).toHaveLength(1)
-    //   expect(products).toContainEqual(expect.any(Product))
-    //   expect(storageGatewayMok.getProducts).toHaveBeenCalledTimes(0)
-    //   expect(productsInteractor.getAll).toHaveBeenCalledTimes(1)
-    //   expect(ProductsInteractorMock.mock.instances[0].getAll).toHaveBeenCalledTimes(1)
-    // })
+      expect(product).toBeInstanceOf(Product)
+      expect(product).toEqual(expectedProducts[0])
+      expect(storageGatewayMok.getProduct).toHaveBeenCalledTimes(1)
+    })
+
+    it("should throw if no products found", () => {
+      storageGatewayMok.getProduct
+        .mockReturnValueOnce(null)
+        .mockReturnValueOnce(undefined)
+      const productsInteractor = new ProductsInteractor(storageGatewayMok)
+
+      expect(() => productsInteractor.getProduct("foooo")).toThrow(ProductNotFoundError)
+      expect(() => productsInteractor.getProduct("foooo")).toThrow(ProductNotFoundError)
+      expect(storageGatewayMok.getProduct).toHaveBeenCalledTimes(2)
+    })
+
+    it("should throw if error in storage gateway", () => {
+      storageGatewayMok.getProduct.mockImplementationOnce(() => { throw new Error("fooooo !!!") })
+      const productsInteractor = new ProductsInteractor(storageGatewayMok)
+
+      expect(() => productsInteractor.getProduct("foooo")).toThrow(ProductNotFoundError)
+    })
   })
 })

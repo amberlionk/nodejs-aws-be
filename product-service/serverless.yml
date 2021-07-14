@@ -1,10 +1,12 @@
 service: product-service
 app: rs-school-app
+frameworkVersion: '2'
 
 provider:
   name: aws
-  runtime: nodejs12.x
+  runtime: nodejs14.x
   region: eu-west-1
+  lambdaHashingVersion: 20201221
   profile: yevhenAdmin
   stage: dev
   stackTags:

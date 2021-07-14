@@ -1,28 +1,21 @@
-const productList = require("./../drivers/productList.json")
+const { ProductsInteractor } = require("../interactors/products-interactor")
+const { storageGatewayFactory } = require("../drivers/storage-gateway")
+const productPresenter = require("./presenters/product-presenter")
 
-/**
- * get all products handlers
- *
- * @param  {object} event
- * @param  {string} event.productId url path param
- * @param  {object} context
- * @typedef {object} Response
- * @property {object} headers
- * @property {number} statusCode
- * @property {object} body
- * @returns {Response}
- */
 async function getProductById (event, context) {
   const { productId } = event
 
-  productList.find(product => product.id === productId)
+  const storageGatewayInstance = storageGatewayFactory()
+  const productsInteractor = new ProductsInteractor(storageGatewayInstance)
+  const product = productsInteractor.getProduct(productId)
 
+  const respProduct = productPresenter(product)
   return {
     headers: {
       "Access-Control-Allow-Origin": "*"
     },
     statusCode: 200,
-    body: JSON.stringify(productList[0])
+    body: JSON.stringify(respProduct)
   }
 }
 

@@ -1,4 +1,4 @@
-const { getAllProducts } = require("./get-all-products")
+const { getProductById } = require("./get-product-by-id")
 const { ProductsInteractor } = require("../interactors/products-interactor")
 const { Product } = require("../entities/product")
 
@@ -9,20 +9,20 @@ beforeEach(() => {
   jest.clearAllMocks()
 })
 
-describe("getAllProducts", () => {
-  it("should return all products", () => {
-    const getAllMock = jest.fn().mockReturnValue([new Product({
+describe("getProductById", () => {
+  it("should return product by ID", () => {
+    const getProductMock = jest.fn().mockReturnValue(new Product({
       id: 1,
       count: 10,
       description: "descr",
       img: "http://example.com/img.png",
       price: 100,
       title: "title"
-    })])
+    }))
 
     ProductsInteractor.mockImplementationOnce(() => {
       return {
-        getAll: getAllMock
+        getProduct: getProductMock
       }
     })
 
@@ -31,10 +31,10 @@ describe("getAllProducts", () => {
         "Access-Control-Allow-Origin": "*"
       },
       statusCode: 200,
-      body: "[{\"id\":1,\"description\":\"descr\",\"title\":\"title\",\"img\":\"http://example.com/img.png\",\"count\":10,\"price\":\"100.00\"}]"
+      body: "{\"id\":1,\"description\":\"descr\",\"title\":\"title\",\"img\":\"http://example.com/img.png\",\"count\":10,\"price\":\"100.00\"}"
     }
 
-    const result = getAllProducts()
+    const result = getProductById({ id: 1 })
 
     expect(result).resolves.toEqual(expectedResult)
   })
