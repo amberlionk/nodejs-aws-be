@@ -1,5 +1,5 @@
 function productPresenter (product) {
-  if (!product) return undefined
+  if (!product) return null
   // make sanitizing here
 
   return { ...product }
