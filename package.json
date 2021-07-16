@@ -1,0 +1,40 @@
+{
+  "name": "nodejs-aws-be",
+  "version": "1.0.0",
+  "description": "Combined repo for AWS RS-school app",
+  "homepage": "https://github.com/amberlionk/nodejs-aws-be#readme",
+  "bugs": {
+    "url": "https://github.com/amberlionk/nodejs-aws-be/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/amberlionk/nodejs-aws-be.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "scripts": {
+    "test": "jest",
+    "tdd": "jest --watch",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "commit:check": "npm run lint && npm run test --runInBand",
+    "postinstall": "cd product-service && npm i"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run commit:check"
+    }
+  },
+  "devDependencies": {
+    "@types/jest": "^26.0.23",
+    "eslint": "^7.14.0",
+    "eslint-config-standard": "^16.0.2",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-json-format": "^2.0.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-require-path-exists": "^1.1.9",
+    "husky": "^4.3.0",
+    "jest": "^27.0.3"
+  }
+}

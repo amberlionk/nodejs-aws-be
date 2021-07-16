@@ -1,0 +1,50 @@
+{
+  "env": {
+    "node": true,
+    "jest": true,
+    "es2021": true
+  },
+  "overrides": [
+    {
+      "files": [
+        "*.json"
+      ],
+      "plugins": [
+        "json-format"
+      ],
+      "settings": {
+        "json/ignore-files": [
+          "**/package-lock.json"
+        ],
+        "json/json-with-comments-files": [
+          "*.eslintrc.json"
+        ]
+      }
+    }
+  ],
+  "extends": [
+    "standard",
+    "plugin:require-path-exists/recommended"
+  ],
+  "plugins": [
+    "require-path-exists"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 12,
+    "sourceType": "module"
+  },
+  "rules": {
+    "quotes": [
+      "error",
+      "double"
+    ],
+    "comma-dangle": [
+      "error",
+      "never"
+    ],
+    "linebreak-style": [
+      "error",
+      "unix"
+    ]
+  }
+}
